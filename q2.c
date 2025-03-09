@@ -57,3 +57,21 @@ for (int i = 0; i < NUM_RUNS; ++i) {
 }
 
 printf("Average Static Execution Time: %.3f ms\n", totalTimeStatic / NUM_RUNS);
+double totalTimeDynamic = 0.0; // Variable to store total execution time for dynamic scheduling
+
+// Dynamic Scheduling Execution
+for (int i = 0; i < NUM_RUNS; ++i) {
+    clock_t start = clock(); // Start time measurement
+    int maxElement = findMaxParallel(arr, 'd'); // Find max using dynamic scheduling
+    clock_t end = clock(); // End time measurement
+
+    double duration = ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0; // Convert to ms
+    totalTimeDynamic += duration;
+
+    printf("Dynamic Run %d: Max = %d, Time = %.3f ms\n", i + 1, maxElement, duration);
+}
+
+printf("Average Dynamic Execution Time: %.3f ms\n", totalTimeDynamic / NUM_RUNS);
+
+return 0;
+}
