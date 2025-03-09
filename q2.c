@@ -42,4 +42,18 @@ int findMaxParallel(int arr[ROWS][COLS], char scheduleType) {
     }
     return maxElement;
 }
+double totalTimeStatic = 0.0; // Variable to store total execution time for static scheduling
 
+// Static Scheduling Execution
+for (int i = 0; i < NUM_RUNS; ++i) {
+    clock_t start = clock(); // Start time measurement
+    int maxElement = findMaxParallel(arr, 's'); // Find max using static scheduling
+    clock_t end = clock(); // End time measurement
+
+    double duration = ((double)(end - start) / CLOCKS_PER_SEC) * 1000.0; // Convert to ms
+    totalTimeStatic += duration;
+
+    printf("Static Run %d: Max = %d, Time = %.3f ms\n", i + 1, maxElement, duration);
+}
+
+printf("Average Static Execution Time: %.3f ms\n", totalTimeStatic / NUM_RUNS);
